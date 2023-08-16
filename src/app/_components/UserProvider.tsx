@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { UserContext } from "../_context/user";
 import { User } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "../_types/supabase";
 
 const UserProvider = ({
   children,
@@ -14,7 +15,7 @@ const UserProvider = ({
 }) => {
   const [user, setUser] = useState(defaultUser);
 
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient<Database>();
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {

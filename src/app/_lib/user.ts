@@ -4,12 +4,13 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Database } from "../_types/supabase";
 
 export function getUser(): Promise<User | null>;
 export function getUser(requireAuthorization: true): Promise<User>;
 
 export async function getUser(requireAuthorization: boolean = false) {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createServerComponentClient<Database>({ cookies });
   const user = await supabase.auth.getUser();
 
   if (requireAuthorization && user.error) {
