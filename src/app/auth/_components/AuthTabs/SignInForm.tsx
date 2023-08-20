@@ -33,7 +33,7 @@ const SignInForm = () => {
     });
 
     setLoading(false);
-    router.push("/account");
+    router.push("/");
   };
 
   return (

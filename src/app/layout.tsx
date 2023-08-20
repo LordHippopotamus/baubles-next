@@ -12,7 +12,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <body>
         <UserProvider defaultUser={user}>
           <ThemeRegistry options={{ key: "mui" }}>
-            <Paper elevation={0} sx={{ minHeight: "100vh" }}>
+            <Paper elevation={0} sx={{ minHeight: "100vh", borderRadius: 0 }}>
               <Navigation />
               {children}
             </Paper>

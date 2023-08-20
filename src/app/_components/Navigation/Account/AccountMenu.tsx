@@ -3,11 +3,20 @@
 import { useUser } from "@/app/_hooks/user";
 import { AccountCircle } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AccountMenu = () => {
   const { user } = useUser();
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth");
+  };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -42,9 +51,7 @@ const AccountMenu = () => {
         <MenuItem component={Link} href={"/users/" + user?.id}>
           Profile
         </MenuItem>
-        <MenuItem component={Link} href="/account">
-          My account
-        </MenuItem>
+        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
       </Menu>
     </>
   );
