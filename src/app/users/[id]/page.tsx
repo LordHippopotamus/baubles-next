@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import { getUser } from "@/app/_lib/user";
+import { getUser } from "@/lib/user";
 import { getProfile } from "./_lib/profile";
 import { getUserBaubles } from "./_lib/baubles";
 import CreateBaubleDialog from "./_components/CreateBaubleDialog";

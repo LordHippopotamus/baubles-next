@@ -4,7 +4,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Database } from "../_types/supabase";
+import { Database } from "@/types";
 
 export function getUser(): Promise<User | null>;
 export function getUser(requireAuthorization: true): Promise<User>;

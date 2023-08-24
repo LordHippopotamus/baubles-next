@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/app/_hooks/user";
+import { useUser } from "@/hooks/user";
 import { AccountCircle } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";

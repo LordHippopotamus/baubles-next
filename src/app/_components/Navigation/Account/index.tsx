@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/app/_hooks/user";
+import { useUser } from "@/hooks/user";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import AccountMenu from "./AccountMenu";

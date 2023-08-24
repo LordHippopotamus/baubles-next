@@ -1,4 +1,4 @@
-import { Database } from "@/app/_types/supabase";
+import { Database } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { User } from "@supabase/supabase-js";
 import { cookies } from "next/headers";

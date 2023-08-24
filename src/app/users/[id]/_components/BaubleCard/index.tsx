@@ -1,5 +1,4 @@
-import { Row } from "@/app/_types";
-import { Delete } from "@mui/icons-material";
+import { Row } from "@/types";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import DeleteButton from "./DeleteButton";
 

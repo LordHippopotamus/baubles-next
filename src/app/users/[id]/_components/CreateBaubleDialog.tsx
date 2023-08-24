@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Add } from "@mui/icons-material";
-import { Database } from "@/app/_types/supabase";
+import { Database } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { LoadingButton } from "@mui/lab";

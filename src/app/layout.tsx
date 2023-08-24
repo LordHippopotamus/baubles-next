@@ -1,8 +1,8 @@
 import Navigation from "./_components/Navigation";
 import ThemeRegistry from "./_components/ThemeRegistry";
 import { Paper } from "@mui/material";
-import UserProvider from "./_components/UserProvider";
-import { getUser } from "./_lib/user";
+import UserProvider from "../components/UserProvider";
+import { getUser } from "../lib/user";
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();

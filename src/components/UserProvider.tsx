@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { UserContext } from "../_context/user";
+import { UserContext } from "@/contexts/user";
 import { User } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "../_types/supabase";
+import { Database } from "@/types";
 
 const UserProvider = ({
   children,

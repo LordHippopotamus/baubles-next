@@ -1,7 +1,6 @@
 "use client";
 
-import { Row } from "@/app/_types";
-import { Database } from "@/app/_types/supabase";
+import { Database, Row } from "@/types";
 import { Delete } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
