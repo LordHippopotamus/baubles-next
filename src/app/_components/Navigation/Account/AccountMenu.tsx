@@ -13,16 +13,11 @@ const AccountMenu = () => {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/auth");
-  };
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -30,9 +25,15 @@ const AccountMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    handleClose();
+    router.push("/auth");
+  };
+
   return (
     <>
-      <IconButton onClick={handleClick} size="small">
+      <IconButton onClick={handleOpen} size="small">
         <AccountCircle fontSize="large" />
       </IconButton>
       <Menu
@@ -48,7 +49,11 @@ const AccountMenu = () => {
           horizontal: "left",
         }}
       >
-        <MenuItem component={Link} href={"/users/" + user?.id}>
+        <MenuItem
+          onClick={handleClose}
+          component={Link}
+          href={"/users/" + user?.id}
+        >
           Profile
         </MenuItem>
         <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
