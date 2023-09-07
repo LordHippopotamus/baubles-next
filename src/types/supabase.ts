@@ -11,18 +11,21 @@ export interface Database {
     Tables: {
       baubles: {
         Row: {
+          area: Json
           author: string
           created_at: string
           id: string
           name: string
         }
         Insert: {
+          area?: Json
           author?: string
           created_at?: string
           id?: string
           name?: string
         }
         Update: {
+          area?: Json
           author?: string
           created_at?: string
           id?: string

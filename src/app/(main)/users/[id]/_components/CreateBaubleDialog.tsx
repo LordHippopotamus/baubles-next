@@ -27,6 +27,7 @@ const CreateBaubleDialog = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     // TODO: add validation
+    // TODO: fix emty name
     event.preventDefault();
     setLoading(true);
     const formData = new FormData(event.currentTarget);

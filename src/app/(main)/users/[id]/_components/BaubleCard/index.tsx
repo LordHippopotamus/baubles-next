@@ -1,6 +1,7 @@
 import { Row } from "@/types";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const BaubleCard = ({
   bauble,
@@ -20,8 +21,9 @@ const BaubleCard = ({
         </Typography>
       </CardContent>
       {showDeleteButton && (
-        <CardActions>
+        <CardActions sx={{ display: "flex", gap: 1 }}>
           <DeleteButton id={bauble.id} />
+          <EditButton id={bauble.id} />
         </CardActions>
       )}
     </Card>

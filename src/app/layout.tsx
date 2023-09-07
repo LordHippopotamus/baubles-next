@@ -1,8 +1,7 @@
-import Navigation from "./_components/Navigation";
 import ThemeRegistry from "./_components/ThemeRegistry";
 import { Paper } from "@mui/material";
-import UserProvider from "../components/UserProvider";
-import { getUser } from "../lib/user";
+import UserProvider from "@/components/UserProvider";
+import { getUser } from "@/lib/user";
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
@@ -13,7 +12,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         <UserProvider defaultUser={user}>
           <ThemeRegistry options={{ key: "mui" }}>
             <Paper elevation={0} sx={{ minHeight: "100vh", borderRadius: 0 }}>
-              <Navigation />
               {children}
             </Paper>
           </ThemeRegistry>
