@@ -9,3 +9,4 @@ export type UpdateDto<T extends keyof Database["public"]["Tables"]> =
 
 export * from "./supabase";
 export * from "./area";
+export * from "./palette";

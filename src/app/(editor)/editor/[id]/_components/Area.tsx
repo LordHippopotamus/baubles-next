@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useToolStore } from "../_hooks/toolsStore";
 import { usePaletteStore } from "../_hooks/paletteStore";
 
-const Area = ({ defaultArea }: { defaultArea: Area }) => {
+const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const area = useAreaStore((state) => state.area);
   const setArea = useAreaStore((state) => state.setArea);
   const draw = useAreaStore((state) => state.draw);
@@ -16,13 +16,14 @@ const Area = ({ defaultArea }: { defaultArea: Area }) => {
 
   const tool = useToolStore((state) => state.tool);
 
-  const selectedColor = usePaletteStore((state) => state.palette).find(
-    (el) => el.selected
-  )?.color;
+  const selectedColor = usePaletteStore(
+    (state) => state.palette.find((el) => el.selected)?.color
+  );
 
   const { palette } = useTheme();
 
-  useEffect(() => setArea(defaultArea), [defaultArea, setArea]);
+  useEffect(() => setArea(fetchedArea), [fetchedArea, setArea]);
+  // TODO: fix dont working eraser
 
   const handleMove = (event: React.MouseEvent) => {
     if (!selectedColor || !(event.target instanceof SVGPathElement)) return;

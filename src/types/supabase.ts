@@ -16,6 +16,7 @@ export interface Database {
           created_at: string
           id: string
           name: string
+          palette: Json
         }
         Insert: {
           area?: Json
@@ -23,6 +24,7 @@ export interface Database {
           created_at?: string
           id?: string
           name?: string
+          palette?: Json
         }
         Update: {
           area?: Json
@@ -30,6 +32,7 @@ export interface Database {
           created_at?: string
           id?: string
           name?: string
+          palette?: Json
         }
         Relationships: [
           {

@@ -23,7 +23,7 @@ const ColorButton = ({ color, id }: { color: string | null; id: number }) => {
       : closeContextMenu();
   };
 
-  if (color) {
+  if (color !== "transparent") {
     return (
       <IconButton
         size="large"

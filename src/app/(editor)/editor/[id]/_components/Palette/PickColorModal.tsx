@@ -22,13 +22,13 @@ const PickColorModal = () => {
   const [color, setColor] = useState<string>("666666");
 
   const handleSave = () => {
-    if (!pickColorModal || !color) return;
+    if (pickColorModal === null || !color) return;
     setColorToPalette(pickColorModal, color);
     closePickColorModal();
   };
 
   return (
-    <Dialog open={!!pickColorModal} onClose={closePickColorModal}>
+    <Dialog open={pickColorModal !== null} onClose={closePickColorModal}>
       <DialogTitle>Pick Color</DialogTitle>
       <DialogContent>
         <ChromePicker

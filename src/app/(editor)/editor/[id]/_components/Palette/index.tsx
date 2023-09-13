@@ -2,16 +2,20 @@
 
 import { Palette as PaletteIcon } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorList from "./ColorList";
 import PickColorModal from "./PickColorModal";
 import { usePaletteStore } from "@editor/_hooks/paletteStore";
 import ContextMenu from "./ContextMenu";
+import { Palette } from "@/types";
 
-const Palette = () => {
+const Palette = ({ fetchedPalette }: { fetchedPalette: Palette }) => {
   const [open, setOpen] = useState(false);
   const palette = usePaletteStore((state) => state.palette);
   const selectedColor = palette.find((el) => el.selected);
+  const setPalette = usePaletteStore((state) => state.setPalette);
+
+  useEffect(() => setPalette(fetchedPalette), [fetchedPalette, setPalette]);
 
   return (
     <>
