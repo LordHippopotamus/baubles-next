@@ -21,33 +21,35 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const { palette } = useTheme();
 
   useEffect(() => setArea(fetchedArea), [fetchedArea, setArea]);
-  // TODO: fix dont working eraser
-
+  
   const handleMove = (event: React.MouseEvent) => {
-    if (!selectedColor || !(event.target instanceof SVGPathElement)) return;
-    if (event.buttons === 1 && event.target.tagName === "path") {
+    if (
+      event.buttons === 1 &&
+      event.target instanceof SVGPathElement &&
+      event.target.tagName === "path"
+    ) {
       const [x, y] = event.target.id.split(";");
-      if (tool === "brush") draw(+x, +y, selectedColor);
+      if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
       if (tool === "eraser") draw(+x, +y, "transparent");
     }
   };
 
   const handleClick = (event: React.MouseEvent) => {
-    if (!selectedColor || !(event.target instanceof SVGPathElement)) return;
+    if (!(event.target instanceof SVGPathElement)) return;
     const [x, y] = event.target.id.split(";");
-    if (tool === "brush") draw(+x, +y, selectedColor);
+    if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };
 
   const handleTouch = (event: React.TouchEvent) => {
-    if (!selectedColor || !(event.target instanceof SVGPathElement)) return;
+    if (!(event.target instanceof SVGPathElement)) return;
     const target = document.elementFromPoint(
       event.changedTouches[0].clientX,
       event.changedTouches[0].clientY
     );
     if (!target) return;
     const [x, y] = target.id.split(";");
-    if (tool === "brush") draw(+x, +y, selectedColor);
+    if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };
 
