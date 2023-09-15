@@ -6,7 +6,13 @@ import { usePickColorModal } from "./pickColorModalStore";
 import { usePaletteStore } from "@editor/_hooks/paletteStore";
 import { useContextMenu } from "./contextMenuStore";
 
-const ColorButton = ({ color, id }: { color: string | null; id: number }) => {
+const ColorButton = ({
+  color,
+  index,
+}: {
+  color: string | null;
+  index: number;
+}) => {
   const openPickColorModal = usePickColorModal(
     (state) => state.openPickColorModal
   );
@@ -19,24 +25,24 @@ const ColorButton = ({ color, id }: { color: string | null; id: number }) => {
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
     !contextMenu
-      ? openContextMenu(event.clientX + 2, event.clientY - 6, id)
+      ? openContextMenu(event.clientX + 2, event.clientY - 6, index)
       : closeContextMenu();
   };
 
-  if (color !== "transparent") {
+  if (color) {
     return (
       <IconButton
         size="large"
-        onClick={() => selectColor(id)}
+        onClick={() => selectColor(index)}
         onContextMenu={handleContextMenu}
       >
-        <Circle sx={{ color: color }} fontSize="large" />
+        <Circle sx={{ color }} fontSize="large" />
       </IconButton>
     );
   }
 
   return (
-    <IconButton size="large" onClick={() => openPickColorModal(id)}>
+    <IconButton size="large" onClick={() => openPickColorModal(index)}>
       <Add fontSize="large" />
     </IconButton>
   );

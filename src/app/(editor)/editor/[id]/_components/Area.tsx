@@ -16,9 +16,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
 
   const tool = useToolStore((state) => state.tool);
 
-  const selectedColor = usePaletteStore(
-    (state) => state.palette.find((el) => el.selected)?.color
-  );
+  const selectedColor = usePaletteStore((state) => state.selectedColor);
 
   const { palette } = useTheme();
 

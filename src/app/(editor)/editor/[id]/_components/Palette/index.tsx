@@ -7,12 +7,10 @@ import ColorList from "./ColorList";
 import PickColorModal from "./PickColorModal";
 import { usePaletteStore } from "@editor/_hooks/paletteStore";
 import ContextMenu from "./ContextMenu";
-import { Palette } from "@/types";
 
-const Palette = ({ fetchedPalette }: { fetchedPalette: Palette }) => {
+const Palette = ({ fetchedPalette }: { fetchedPalette: string[] }) => {
   const [open, setOpen] = useState(false);
-  const palette = usePaletteStore((state) => state.palette);
-  const selectedColor = palette.find((el) => el.selected);
+  const selectedColor = usePaletteStore((state) => state.selectedColor);
   const setPalette = usePaletteStore((state) => state.setPalette);
 
   useEffect(() => setPalette(fetchedPalette), [fetchedPalette, setPalette]);

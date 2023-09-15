@@ -17,8 +17,8 @@ const ColorList = ({ open }: { open: boolean }) => {
       gridTemplateRows="repeat(3, 1fr)"
       gap={1}
     >
-      {palette.map((color) => (
-        <ColorButton color={color.color} id={color.id} key={color.id} />
+      {palette.map((color, index) => (
+        <ColorButton color={color} index={index} key={index} />
       ))}
     </Box>
   );

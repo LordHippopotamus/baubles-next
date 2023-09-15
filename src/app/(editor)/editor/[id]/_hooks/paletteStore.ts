@@ -1,33 +1,34 @@
-import { Palette, PaletteColor } from "@/types";
 import { create } from "zustand";
 
 interface PaletteState {
-  palette: Palette;
-  setPalette: (palette: Palette) => void;
-  setColor: (id: PaletteColor["id"], color: PaletteColor["color"]) => void;
-  deleteColor: (id: PaletteColor["id"]) => void;
-  selectColor: (id: PaletteColor["id"]) => void;
+  palette: (string | null)[];
+  selectedColor: null | string;
+  setPalette: (palette: string[]) => void;
+  setColor: (index: number, color: string) => void;
+  deleteColor: (index: number) => void;
+  selectColor: (index: number) => void;
 }
 
 export const usePaletteStore = create<PaletteState>((set) => ({
   palette: [],
+  selectedColor: null,
   setPalette: (palette) => set({ palette }),
-  setColor: (id, color) =>
+  setColor: (receivedIndex, color) =>
     set((state) => ({
-      palette: state.palette.map((el) =>
-        el.id === id
-          ? { id, color, selected: true }
-          : { ...el, selected: false }
+      palette: state.palette.map((el, index) =>
+        receivedIndex === index ? color : el
       ),
+      selectedColor: color
     })),
-  deleteColor: (id) =>
+  deleteColor: (receivedIndex) =>
     set((state) => ({
-      palette: state.palette.map((el) =>
-        el.id === id ? { ...el, color: "transparent" } : { ...el }
+      palette: state.palette.map((el, index) =>
+        receivedIndex === index ? null : el
       ),
+      selectedColor: state.selectedColor === state.palette[receivedIndex] ? null : state.selectedColor
     })),
-  selectColor: (id) =>
+  selectColor: (index) =>
     set((state) => ({
-      palette: state.palette.map((el) => ({ ...el, selected: el.id === id })),
+      selectedColor: state.palette[index]
     })),
 }));
