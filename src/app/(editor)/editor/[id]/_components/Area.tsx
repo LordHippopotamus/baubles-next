@@ -7,12 +7,16 @@ import { Area } from "@/types";
 import { useEffect } from "react";
 import { useToolStore } from "../_hooks/toolsStore";
 import { usePaletteStore } from "../_hooks/paletteStore";
+import { useEmptyColorAlertStore } from "../_hooks/emptyColorAlertStore";
 
 const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const area = useAreaStore((state) => state.area);
   const setArea = useAreaStore((state) => state.setArea);
   const draw = useAreaStore((state) => state.draw);
   const sizes = useAreaStore((state) => state.getSizes)();
+  const setOpen = useEmptyColorAlertStore(state => state.setOpen)
+
+  const openEmptyColorAlert = () => setOpen(true)
 
   const tool = useToolStore((state) => state.tool);
 
@@ -29,6 +33,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
       event.target.tagName === "path"
     ) {
       const [x, y] = event.target.id.split(";");
+      if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
       if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
       if (tool === "eraser") draw(+x, +y, "transparent");
     }
@@ -37,6 +42,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const handleClick = (event: React.MouseEvent) => {
     if (!(event.target instanceof SVGPathElement)) return;
     const [x, y] = event.target.id.split(";");
+    if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
     if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };
@@ -49,6 +55,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
     );
     if (!target) return;
     const [x, y] = target.id.split(";");
+    if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
     if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };
