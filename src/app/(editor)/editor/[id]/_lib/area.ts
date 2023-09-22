@@ -1,4 +1,5 @@
-import { Database, isArea } from "@/types";
+import { Database } from "@/types";
+import { isArea } from "@editor/_types/area";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
