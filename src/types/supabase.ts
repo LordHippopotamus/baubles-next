@@ -38,7 +38,7 @@ export interface Database {
           {
             foreignKeyName: "baubles_author_fkey"
             columns: ["author"]
-            referencedRelation: "users"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]
@@ -46,15 +46,15 @@ export interface Database {
       profiles: {
         Row: {
           id: string
-          name: string | null
+          name: string
         }
         Insert: {
           id: string
-          name?: string | null
+          name?: string
         }
         Update: {
           id?: string
-          name?: string | null
+          name?: string
         }
         Relationships: [
           {
