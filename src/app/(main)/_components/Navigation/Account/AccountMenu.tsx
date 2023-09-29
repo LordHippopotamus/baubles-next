@@ -29,6 +29,7 @@ const AccountMenu = () => {
     await supabase.auth.signOut();
     handleClose();
     router.push("/auth");
+    router.refresh();
   };
 
   return (
