@@ -4,27 +4,43 @@ import {
   createServerComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { BaubleForCard } from "../_types/baubles";
+import { BaublesList } from "../_types/baubles";
 
-export const getBaublesForCard = async (
-  id?: User["id"]
-): Promise<BaubleForCard[]> => {
+export const getBaublesList = async ({
+  page = 1,
+  perPage = 10,
+  id,
+}: {
+  page?: number;
+  perPage?: number;
+  id?: User["id"];
+}): Promise<BaublesList> => {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: baubles, error } = id
+  const {
+    data: baubles,
+    count,
+    error,
+  } = id
     ? await supabase
         .from("baubles")
-        .select("id, created_at, name, author (id, name)")
+        .select("id, created_at, name, author (id, name)", { count: "exact" })
         .eq("author.id", id)
-        .returns<BaubleForCard[]>()
+        .range((page - 1) * perPage, page * perPage - 1)
+        .returns<BaublesList["baubles"]>()
     : await supabase
         .from("baubles")
-        .select("id, created_at, name, author (id, name)")
-        .returns<BaubleForCard[]>();
+        .select("id, created_at, name, author (id, name)", { count: "exact" })
+        .range((page - 1) * perPage, page * perPage - 1)
+        .returns<BaublesList["baubles"]>();
 
   if (error) {
     throw new Error(error.message);
   }
 
-  return baubles;
+  if (!count) {
+    throw new Error("unable to get count of baubles");
+  }
+
+  return { baubles, count };
 };

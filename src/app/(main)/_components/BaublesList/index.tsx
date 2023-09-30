@@ -1,42 +1,39 @@
-import { BaubleForCard } from "@main/_types/baubles";
+import { BaublesList } from "@main/_types/baubles";
 import BaubleCard from "./BaubleCard";
-import { Alert, AlertTitle, Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import CreateBaubleDialog from "./CreateBaubleDialog";
+import Pagination from "./Pagination";
+import NoBaublesAlert from "./NoBaublesAlert";
 
 const BaublesList = ({
   baubles,
+  count,
+  page = 1,
+  perPage = 10,
   showSensitiveActions = false,
 }: {
-  baubles: BaubleForCard[];
+  baubles: BaublesList["baubles"];
+  count: BaublesList["count"];
+  page?: number;
+  perPage?: number;
   showSensitiveActions?: boolean;
-}) => {
-  return (
-    <>
-      {showSensitiveActions && (
-        <Box alignSelf="flex-start">
-          <CreateBaubleDialog />
-        </Box>
-      )}
-      <Box display="flex" flexDirection="column" gap={2} width="100%" mt={2}>
-        {!baubles.length && (
-          <Paper elevation={1}>
-            <Alert severity="info" variant="filled">
-              <AlertTitle>No baubles</AlertTitle>
-              There's no baubles yet, just create your first!
-            </Alert>
-          </Paper>
-        )}
-        <Box display="flex" flexDirection="column" gap={2}>
-          {baubles.map((bauble) => (
-            <BaubleCard
-              bauble={bauble}
-              showSensitiveActions={showSensitiveActions}
-            />
-          ))}
-        </Box>
+}) => (
+  <>
+    {showSensitiveActions && <CreateBaubleDialog />}
+    <Box display="flex" flexDirection="column" gap={2} width="100%" mt={2}>
+      {!baubles.length && <NoBaublesAlert />}
+      <Box display="flex" flexDirection="column" gap={2}>
+        {baubles.map((bauble) => (
+          <BaubleCard
+            key={bauble.id}
+            bauble={bauble}
+            showSensitiveActions={showSensitiveActions}
+          />
+        ))}
       </Box>
-    </>
-  );
-};
+    </Box>
+    <Pagination count={Math.ceil(count / perPage)} page={page} />
+  </>
+);
 
 export default BaublesList;
