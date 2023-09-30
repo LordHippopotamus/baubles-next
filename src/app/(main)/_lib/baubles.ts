@@ -4,7 +4,7 @@ import {
   createServerComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { BaublesList } from "../_types/baubles";
+import { BaublesResponse } from "../_types/baubles";
 
 export const getBaublesList = async ({
   page = 1,
@@ -14,7 +14,7 @@ export const getBaublesList = async ({
   page?: number;
   perPage?: number;
   id?: User["id"];
-}): Promise<BaublesList> => {
+}): Promise<BaublesResponse> => {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const {
@@ -27,12 +27,12 @@ export const getBaublesList = async ({
         .select("id, created_at, name, author (id, name)", { count: "exact" })
         .eq("author.id", id)
         .range((page - 1) * perPage, page * perPage - 1)
-        .returns<BaublesList["baubles"]>()
+        .returns<BaublesResponse["baubles"]>()
     : await supabase
         .from("baubles")
         .select("id, created_at, name, author (id, name)", { count: "exact" })
         .range((page - 1) * perPage, page * perPage - 1)
-        .returns<BaublesList["baubles"]>();
+        .returns<BaublesResponse["baubles"]>();
 
   if (error) {
     throw new Error(error.message);

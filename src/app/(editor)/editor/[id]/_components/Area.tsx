@@ -3,7 +3,7 @@
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useAreaStore } from "../_hooks/areaStore";
 import { useTheme } from "@mui/material";
-import { Area } from "@/types";
+import { Area } from "@editor/_types/area";
 import { useEffect } from "react";
 import { useToolStore } from "../_hooks/toolsStore";
 import { usePaletteStore } from "../_hooks/paletteStore";
@@ -14,9 +14,9 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const setArea = useAreaStore((state) => state.setArea);
   const draw = useAreaStore((state) => state.draw);
   const sizes = useAreaStore((state) => state.getSizes)();
-  const setOpen = useEmptyColorAlertStore(state => state.setOpen)
+  const setOpen = useEmptyColorAlertStore((state) => state.setOpen);
 
-  const openEmptyColorAlert = () => setOpen(true)
+  const openEmptyColorAlert = () => setOpen(true);
 
   const tool = useToolStore((state) => state.tool);
 
@@ -25,7 +25,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const { palette } = useTheme();
 
   useEffect(() => setArea(fetchedArea), [fetchedArea, setArea]);
-  
+
   const handleMove = (event: React.MouseEvent) => {
     if (
       event.buttons === 1 &&
@@ -33,7 +33,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
       event.target.tagName === "path"
     ) {
       const [x, y] = event.target.id.split(";");
-      if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
+      if (tool === "brush" && !selectedColor) return openEmptyColorAlert();
       if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
       if (tool === "eraser") draw(+x, +y, "transparent");
     }
@@ -42,7 +42,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
   const handleClick = (event: React.MouseEvent) => {
     if (!(event.target instanceof SVGPathElement)) return;
     const [x, y] = event.target.id.split(";");
-    if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
+    if (tool === "brush" && !selectedColor) return openEmptyColorAlert();
     if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };
@@ -55,7 +55,7 @@ const Area = ({ fetchedArea }: { fetchedArea: Area }) => {
     );
     if (!target) return;
     const [x, y] = target.id.split(";");
-    if (tool === "brush" && !selectedColor) return openEmptyColorAlert()
+    if (tool === "brush" && !selectedColor) return openEmptyColorAlert();
     if (tool === "brush" && selectedColor) draw(+x, +y, selectedColor);
     if (tool === "eraser") draw(+x, +y, "transparent");
   };

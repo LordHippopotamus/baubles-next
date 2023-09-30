@@ -1,4 +1,4 @@
-import { BaublesList } from "@main/_types/baubles";
+import { BaublesResponse } from "@main/_types/baubles";
 import BaubleCard from "./BaubleCard";
 import { Box } from "@mui/material";
 import CreateBaubleDialog from "./CreateBaubleDialog";
@@ -12,8 +12,8 @@ const BaublesList = ({
   perPage = 10,
   showSensitiveActions = false,
 }: {
-  baubles: BaublesList["baubles"];
-  count: BaublesList["count"];
+  baubles: BaublesResponse["baubles"];
+  count: BaublesResponse["count"];
   page?: number;
   perPage?: number;
   showSensitiveActions?: boolean;
