@@ -24,11 +24,7 @@ const BaublesList = ({
       {!baubles.length && <NoBaublesAlert />}
       <Box display="flex" flexDirection="column" gap={2}>
         {baubles.map((bauble) => (
-          <BaubleCard
-            key={bauble.id}
-            bauble={bauble}
-            showSensitiveActions={showSensitiveActions}
-          />
+          <BaubleCard key={bauble.id} bauble={bauble} />
         ))}
       </Box>
     </Box>

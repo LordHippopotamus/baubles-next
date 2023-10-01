@@ -1,24 +1,29 @@
 import { Box } from "@mui/material";
 import Area from "./_components/Area";
-import { getArea } from "./_lib/area";
 import Palette from "./_components/Palette";
-import { getPalette } from "./_lib/palette";
 import EmptyColorAlert from "./_components/EmptyColorAlert";
+import { getUser } from "@/lib/user";
+import { getBauble } from "./_lib/bauble";
+import Toolbar from "./_components/Toolbar";
 
 const Editor = async ({ params }: { params: { id: string } }) => {
-  const area = await getArea(params.id);
-  const palette = await getPalette(params.id);
+  const bauble = await getBauble(params.id);
+  const user = await getUser();
+  const isAuthor = user?.id === bauble.author;
 
   return (
+    <>
+      {isAuthor && <Toolbar />}
       <Box
         height={{ xs: "calc(100vh - 56px)", sm: "calc(100vh - 64px)" }}
         display="flex"
         position="relative"
       >
-        <Area fetchedArea={area} />
-        <Palette fetchedPalette={palette} />
+        <Area fetchedArea={bauble.area} />
+        {isAuthor && <Palette fetchedPalette={bauble.palette} />}
         <EmptyColorAlert />
       </Box>
+    </>
   );
 };
 

@@ -42,6 +42,7 @@ const SignUpForm = () => {
 
     setLoading(false);
     router.push("?confirmEmail");
+    router.refresh();
   };
 
   return (

@@ -6,7 +6,7 @@ import { useToolStore } from "@editor/_hooks/toolsStore";
 import Tool from "./Tool";
 import SaveStatus from "./SaveStatus";
 
-const Navigation = () => {
+const Toolbar = () => {
   const tool = useToolStore((state) => state.tool);
   const setTool = useToolStore((state) => state.setTool);
 
@@ -36,4 +36,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Toolbar;
