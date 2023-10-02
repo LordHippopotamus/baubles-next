@@ -8,14 +8,14 @@ export const getBauble = async (id: string) => {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data, error } = await supabase
     .from("baubles")
-    .select("area,palette, author")
+    .select("area, palette, author, name")
     .eq("id", id);
 
   if (error) {
     throw new Error(error.message);
   }
 
-  const { area, palette, author } = data[0];
+  const { area, palette, author, name } = data[0];
 
   if (!isArea(area)) {
     throw new Error("Wrong area type");
@@ -25,5 +25,5 @@ export const getBauble = async (id: string) => {
     throw new Error("Wrong palette type");
   }
 
-  return { area, palette, author };
+  return { area, palette, author, name };
 };
