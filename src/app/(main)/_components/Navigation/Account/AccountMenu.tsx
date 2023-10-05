@@ -34,7 +34,7 @@ const AccountMenu = () => {
 
   return (
     <>
-      <IconButton onClick={handleOpen} size="small">
+      <IconButton onClick={handleOpen} size="small" color="inherit">
         <AccountCircle fontSize="large" />
       </IconButton>
       <Menu
