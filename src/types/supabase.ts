@@ -19,7 +19,7 @@ export interface Database {
           palette: Json
         }
         Insert: {
-          area?: Json
+          area: Json
           author?: string
           created_at?: string
           id?: string

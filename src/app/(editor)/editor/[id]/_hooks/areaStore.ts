@@ -1,4 +1,4 @@
-import { Area } from "@editor/_types/area";
+import { Area } from "@/types/area";
 import { create } from "zustand";
 
 interface AreaState {

@@ -3,7 +3,7 @@
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useAreaStore } from "../_hooks/areaStore";
 import { useTheme } from "@mui/material";
-import { Area } from "@editor/_types/area";
+import { Area } from "@/types/area";
 import { useEffect } from "react";
 import { useToolStore } from "../_hooks/toolsStore";
 import { usePaletteStore } from "../_hooks/paletteStore";

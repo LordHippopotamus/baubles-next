@@ -4,6 +4,7 @@ import { getProfile } from "./_lib/profile";
 import BaublesList from "@main/_components/BaublesList";
 import { getBaublesList } from "@main/_lib/baubles";
 import ProfileName from "./_components/ProfileName";
+import CreateBaubleButton from "./_components/CreateBaubleButton";
 
 const Profile = async ({
   params,
@@ -24,12 +25,8 @@ const Profile = async ({
   return (
     <Container sx={{ py: 4 }}>
       <ProfileName name={profile.name} />
-      <BaublesList
-        baubles={userBaubles}
-        count={count}
-        page={page}
-        showSensitiveActions={isCurrentUserProfile}
-      />
+      {isCurrentUserProfile && <CreateBaubleButton />}
+      <BaublesList baubles={userBaubles} count={count} page={page} />
     </Container>
   );
 };
